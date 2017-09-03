@@ -1,0 +1,24 @@
+<a href="{{stats.url}}">Blockchain.info link</a><br />
+
+Size: {{stats.size}}<br />
+<br />
+Inputs: 
+<table>
+{% for i in stats.inputs %} 
+<tr>
+  <td><a href="/tx/{{i.txid}}">{{i.txid}}</a></td>
+  <td>{{i.vout}}</td>
+</tr>
+{% endfor %}
+</table>
+<br />
+<br />
+Outputs:
+<table>
+{% for o in stats.outputs %} 
+<tr>
+  <td><a href="/{{o.address}}">{{o.address}}</a></td>
+  <td>{{o.value}}</td>
+</tr>
+{% endfor %}
+</table>

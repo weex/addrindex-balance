@@ -98,6 +98,26 @@ class Daemon :
                 except ValueError:
                     return None
 
+	def getrawtransaction(self,txid):
+		command = self.bitcoind_command[:]
+		command.extend(['getrawtransaction',txid])
+		p = Popen(command, stdout=PIPE)
+		io = p.communicate()[0]
+		try:
+                    return io
+                except ValueError:
+                    return None
+
+	def decoderawtransaction(self,raw):
+		command = self.bitcoind_command[:]
+		command.extend(['decoderawtransaction',raw.strip()])
+		p = Popen(command, stdout=PIPE)
+		io = p.communicate()[0]
+		try:
+                    return json.loads(io)
+                except ValueError:
+                    return None
+
 
 if __name__ == "__main__":
 	d = Daemon()
