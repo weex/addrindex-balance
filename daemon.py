@@ -93,7 +93,10 @@ class Daemon :
 		#print self.command
 		p = Popen(command, stdout=PIPE)
 		io = p.communicate()[0]
-		return json.loads(io)
+		try:
+                    return json.loads(io)
+                except ValueError:
+                    return None
 
 
 if __name__ == "__main__":

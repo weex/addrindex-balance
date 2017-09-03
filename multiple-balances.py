@@ -11,9 +11,14 @@ target_addresses = f.readlines()
 
 d = daemon.Daemon()
 
-for t in target_addresses:
+for line in target_addresses:
+    t, comment = line.split(',')
     #print "Getting json..."
     inp = d.searchrawtransactions(t)
+
+    if inp is None:
+        print "Problem getting raw transactions for address: {}".format(t)
+        continue
 
     #print "Processing transaction history..."
     unspent_outputs = {}
@@ -25,6 +30,10 @@ for t in target_addresses:
         tx_count += 1
         for txout in tx['vout']:
             index = 0
+            # print txout['scriptPubKey']
+            if txout['scriptPubKey']['type'] == 'nonstandard':
+                continue
+
             for a in txout['scriptPubKey']['addresses']:
                 if a == t.strip():
                     deposit_count += 1
@@ -47,4 +56,4 @@ for t in target_addresses:
                 #print "-" + str(unspent_outputs[key]) + " = " + str(balance)
                 del unspent_outputs[key]
 
-    print t.strip(), str(balance)
+    print str(balance), comment.strip()
