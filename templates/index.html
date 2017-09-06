@@ -1,16 +1,20 @@
+<h2>Just Another Block Explorer</h2>
 
-Address: <a href="/{{address}}">{{address}}<a/><br />
-<a href="{{stats.url}}">Blockchain.info link</a><br />
-Transactions: {{stats.num_tx}}<br />
-Deposits: {{stats.num_deposits}}<br />
-Balance: {{stats.balance}}<br />
+<h3>Info</h3>
+<p>
+Best block height: {{info.blocks}}<br />
+Difficulty: {{info.difficulty}}<br />
+</p>
 
+
+<h3>Blocks</h3>
 <table>
-{% for tx in stats.transactions %}
-<tr>
-  <td>
-     <a href="/tx/{{tx.txid}}">{{tx.txid}}</a>
-  </td>
-</tr>
+{% for block in blocks %}
+   <tr>
+   <td><a href="/block/{{block.hash}}">{{block.height}}</a></td>
+   <td>{{block.ago}}</td>
+   <td><a href="/block/{{block.hash}}">{{block.hash}}</a></td>
+   <td>{{block.size}}</td>
+   </tr>
 {% endfor %}
 </table>

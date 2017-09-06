@@ -1,0 +1,24 @@
+
+Address: <a href="/address/{{address}}">{{address}}<a/><br />
+
+<br />
+
+<a href="{{stats.url}}">Blockchain.info link</a><br />
+
+<br />
+
+Transactions: {{stats.num_tx}}<br />
+Deposits: {{stats.num_deposits}}<br />
+Balance: {{stats.balance}}<br />
+
+<br />
+
+<table>
+{% for tx in stats.transactions %}
+<tr>
+  <td>
+     <a href="/tx/{{tx.txid}}">{{tx.txid}}</a>
+  </td>
+</tr>
+{% endfor %}
+</table>

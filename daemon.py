@@ -50,6 +50,26 @@ class Daemon :
 		else:
 			logger.info('bitcoind responded')
 
+	def getblockchaininfo(self):
+		command = self.bitcoind_command[:]
+		command.extend(['getblockchaininfo'])
+		p = Popen(command, stdout=PIPE)
+		io = p.communicate()[0]
+		return json.loads(io)
+
+	def get_best_block_hash(self):
+		command = self.bitcoind_command[:]
+		command.extend(['getbestblockhash'])
+		p = Popen(command, stdout=PIPE)
+		io = p.communicate()[0]
+		return io
+
+        def get_block(self,block_hash):
+		command = self.bitcoind_command[:]
+		command.extend(['getblock',block_hash])
+		p = Popen(command, stdout=PIPE)
+		io = p.communicate()[0]
+		return json.loads(io)
 
 	def list_addresses(self):
 		command = self.bitcoind_command[:]

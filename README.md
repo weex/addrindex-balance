@@ -6,7 +6,7 @@ Requires addrindex patched version of Bitcoin Core available from: https://githu
 
 ## Setup
 
-Copy default_settings.py to settings.py and update paths to .bitcoin directory and an existing folder where a log can be saved.
+Copy default\_settings.py to settings.py and update paths to .bitcoin directory and an existing folder where a log can be saved.
 
 Then run:
 
@@ -16,4 +16,4 @@ To report on multiple addresses:
 
     python multiple-balances.py filename.txt
 
-where filename.txt contains Bitcoin addresses one-per-line.
+where filename.txt contains on each line a Bitcoin address, a comma, then a label or comment.
