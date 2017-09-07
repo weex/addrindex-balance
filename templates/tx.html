@@ -7,7 +7,7 @@ Inputs:
 {% for i in stats.inputs %} 
 <tr>
   <td><a href="/tx/{{i.txid}}">{{i.txid}}</a></td>
-  <td>{{i.vout}}</td>
+  <td>{{i.amount}}</td>
 </tr>
 {% endfor %}
 </table>
