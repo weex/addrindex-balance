@@ -50,6 +50,26 @@ class Daemon :
 		else:
 			logger.info('bitcoind responded')
 
+	def getblockchaininfo(self):
+		command = self.bitcoind_command[:]
+		command.extend(['getblockchaininfo'])
+		p = Popen(command, stdout=PIPE)
+		io = p.communicate()[0]
+		return json.loads(io)
+
+	def get_best_block_hash(self):
+		command = self.bitcoind_command[:]
+		command.extend(['getbestblockhash'])
+		p = Popen(command, stdout=PIPE)
+		io = p.communicate()[0]
+		return io
+
+        def get_block(self,block_hash):
+		command = self.bitcoind_command[:]
+		command.extend(['getblock',block_hash])
+		p = Popen(command, stdout=PIPE)
+		io = p.communicate()[0]
+		return json.loads(io)
 
 	def list_addresses(self):
 		command = self.bitcoind_command[:]
@@ -91,6 +111,26 @@ class Daemon :
 		command = self.bitcoind_command[:]
 		command.extend(['searchrawtransactions',address,'1','0','1000'])
 		#print self.command
+		p = Popen(command, stdout=PIPE)
+		io = p.communicate()[0]
+		try:
+                    return json.loads(io)
+                except ValueError:
+                    return None
+
+	def getrawtransaction(self,txid):
+		command = self.bitcoind_command[:]
+		command.extend(['getrawtransaction',txid])
+		p = Popen(command, stdout=PIPE)
+		io = p.communicate()[0]
+		try:
+                    return io
+                except ValueError:
+                    return None
+
+	def decoderawtransaction(self,raw):
+		command = self.bitcoind_command[:]
+		command.extend(['decoderawtransaction',raw.strip()])
 		p = Popen(command, stdout=PIPE)
 		io = p.communicate()[0]
 		try:

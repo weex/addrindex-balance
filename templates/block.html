@@ -1,0 +1,24 @@
+<h2>Block #<a href="/block/{{block.hash}}">{{block.height}}</a></h2>
+
+<table>
+<tr>
+  <td>
+    Hash
+  </td>
+  <td>
+    <a href="/block/{{block.hash}}">{{block.hash}}</a>
+  </td>
+</tr>
+<tr>
+  <td>Time</td>
+  <td>{{block.datetime}} ({{block.ago}})</td>
+</tr>
+<tr>
+  <td>Size (bytes)</td>
+  <td>{{block.size}}</td>
+</tr>
+<tr>
+  <td>Prev. hash</td>
+  <td><a href="/block/{{block.previousblockhash}}">{{block.previousblockhash}}</a></td>
+</tr>
+</table>
