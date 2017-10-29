@@ -84,7 +84,7 @@ if __name__ == '__main__':
     import sys
 
     if len(sys.argv) < 2:
-        print "Usage: python ai-balance.py <address>"
+        print "Usage: python address.py <address>"
         sys.exit()
 
     get_stats(sys.argv[1], console=True)
