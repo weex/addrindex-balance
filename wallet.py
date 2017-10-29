@@ -12,9 +12,12 @@ def process_wallet(f, console=False, detail=False):
              }
 
     for line in target_addresses:
-        target, comment = line.split(',')
-
-        wallet['balance'] = Decimal(0,8)
+        row = line.split(',')
+        if len(row) > 1:
+            target, comment = row
+        else:
+            target = row[0]
+            comment = "No comment"
 
         address = get_stats(target)
         wallet['balance'] += address['balance']
